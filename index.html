@@ -39,6 +39,19 @@
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
+    /* 新增遮罩层样式 */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 40; /* 略低于模态框的z-index */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
 </head>
 <body class="bg-gray-50 min-h-screen py-12 px-4">
@@ -75,8 +88,13 @@
     </div>
   </div>
 
-  <!-- 主容器：搜索区（验证后显示） -->
-  <div id="mainContainer" class="max-w-3xl mx-auto hidden">
+  <!-- 遮罩层：覆盖未验证状态下的功能 -->
+  <div id="overlay" class="overlay hidden">
+    <p class="text-white text-xl font-bold">请先输入访问码</p>
+  </div>
+
+  <!-- 主容器：搜索区（移入分类区域） -->
+  <div id="mainContainer" class="max-w-3xl mx-auto">
     <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center">
       <span class="mr-2">🔍</span> Doujiao
     </h1>
@@ -89,11 +107,12 @@
       </a>
     </p>
 
-    <!-- 类型导航（始终显示，但点击需验证） -->
+    <!-- 类型导航 -->
     <div id="typeNav" class="text-center mt-4">
       <!-- 动态生成按钮 -->
     </div>
 
+    <!-- 搜索框移到分类下方 -->
     <div class="flex flex-col md:flex-row gap-2 items-center justify-center mt-4">
       <input
         id="searchInput"
@@ -101,7 +120,7 @@
         placeholder="输入资源名称..."
         class="w-full md:w-96 px-4 py-3 border border-gray-300 rounded-lg shadow-sm"
       />
-      <button class="search-btn">搜索</button>
+      <button id="searchBtn" class="search-btn">搜索</button>
     </div>
 
     <div id="loading" class="text-center text-gray-500 mt-6 hidden">正在加载资源库...</div>
@@ -119,8 +138,8 @@
     <div id="listPagination" class="mt-8 flex justify-center space-x-2"></div>
   </div>
 
-  <!-- 导航区（验证后显示） -->
-  <div id="navSection" class="max-w-6xl mx-auto mt-12 hidden">
+  <!-- 导航区 -->
+  <div id="navSection" class="max-w-6xl mx-auto mt-12">
     <h2 class="text-2xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center">
       <span class="mr-2">🧭</span> 精选导航
     </h2>
@@ -248,7 +267,7 @@
 
     // DOM
     const searchInput = document.getElementById('searchInput');
-    const searchBtn = document.querySelector('.search-btn');
+    const searchBtn = document.getElementById('searchBtn'); // 修改ID
     const loadingDiv = document.getElementById('loading');
     const resultsDiv = document.getElementById('results');
     const noResultsDiv = document.getElementById('noResults');
@@ -256,23 +275,25 @@
     const listView = document.getElementById('listView');
     const typeNav = document.getElementById('typeNav');
     const accessModal = document.getElementById('accessModal');
-    const navSection = document.getElementById('navSection'); // 新增导航区DOM引用
+    const navSection = document.getElementById('navSection');
+    const overlay = document.getElementById('overlay'); // 新增遮罩层DOM引用
 
     let resources = [];
     let currentListType = null;
     const ITEMS_PER_PAGE = 20;
+    let isVerified = false; // 全局验证状态标志
 
     // 检查是否已通过今日验证
     function checkVerificationStatus() {
       const today = getBeijingDate();
-      const lastVerified = localStorage.getItem('lastVerifiedDate'); // 使用一个新的key来标识网站访问验证
+      const lastVerified = localStorage.getItem('lastVerifiedDate');
       return lastVerified === today;
     }
 
     // 设置今日已验证状态
     function setVerificationStatus() {
       const today = getBeijingDate();
-      localStorage.setItem('lastVerifiedDate', today); // 使用一个新的key
+      localStorage.setItem('lastVerifiedDate', today);
     }
 
     // 获取北京时间的函数
@@ -280,21 +301,63 @@
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
       const beijingTime = new Date(utc + 8 * 3600000);
-      return beijingTime.toLocaleDateString('sv'); // 'sv' 格式为 YYYY-MM-DD
+      return beijingTime.toLocaleDateString('sv');
+    }
+
+    // 显示遮罩层，禁用交互
+    function showOverlay() {
+        overlay.classList.remove('hidden');
+        // 禁用搜索输入框和按钮
+        searchInput.disabled = true;
+        searchInput.classList.add('disabled-input');
+        searchBtn.disabled = true;
+        searchBtn.classList.add('disabled-btn');
+        // 禁用分类按钮的点击事件
+        typeNav.querySelectorAll('button').forEach(btn => {
+            btn.style.pointerEvents = 'none';
+            btn.style.opacity = '0.6';
+        });
+        // 禁用导航链接的点击事件
+        navSection.querySelectorAll('a').forEach(link => {
+            link.style.pointerEvents = 'none';
+            link.style.opacity = '0.6';
+        });
+    }
+
+    // 隐藏遮罩层，启用交互
+    function hideOverlay() {
+        overlay.classList.add('hidden');
+        // 启用搜索输入框和按钮
+        searchInput.disabled = false;
+        searchInput.classList.remove('disabled-input');
+        searchBtn.disabled = false;
+        searchBtn.classList.remove('disabled-btn');
+        // 启用分类按钮的点击事件
+        typeNav.querySelectorAll('button').forEach(btn => {
+            btn.style.pointerEvents = 'auto';
+            btn.style.opacity = '1';
+        });
+        // 启用导航链接的点击事件
+        navSection.querySelectorAll('a').forEach(link => {
+            link.style.pointerEvents = 'auto';
+            link.style.opacity = '1';
+        });
     }
 
     // 初始化页面：检查验证状态
     function initPage() {
         if (checkVerificationStatus()) {
-            // 如果已验证，则直接显示主内容和导航
+            // 如果已验证
+            isVerified = true;
             accessModal.style.display = 'none';
-            mainContainer.classList.remove('hidden');
-            navSection.classList.remove('hidden');
+            hideOverlay(); // 隐藏遮罩，启用功能
             // 然后加载数据
             loadData();
         } else {
-            // 否则，显示访问码模态框
+            // 如果未验证
+            isVerified = false;
             accessModal.style.display = 'flex';
+            showOverlay(); // 显示遮罩，禁用功能
             // 更新模态框中的日期和链接
             updateAccessInfo();
         }
@@ -330,9 +393,9 @@
 
       if (input === record.code) {
         setVerificationStatus(); // 记录验证状态
+        isVerified = true; // 更新全局状态
         accessModal.style.display = 'none'; // 关闭模态框
-        mainContainer.classList.remove('hidden'); // 显示主内容
-        navSection.classList.remove('hidden'); // 显示导航内容
+        hideOverlay(); // 隐藏遮罩，启用功能
         document.getElementById('accessCodeInput').value = ''; // 清空输入框
         errorText.classList.add('hidden'); // 隐藏错误信息
 
@@ -403,14 +466,13 @@
       return cleaned.trim();
     }
 
-    // 移除原有的 showUpdateNotice 函数
-
     async function loadData() {
       if (resources.length > 0) return;
       loadingDiv.classList.remove('hidden');
 
       const dataFiles = [
-        './thai-novel.json'
+        './thai-novel.json',
+        './data2.json'
       ];
 
       try {
@@ -435,7 +497,6 @@
 
         loadingDiv.classList.add('hidden');
         renderTypeNav();
-        // 移除 showUpdateNotice(); 调用
       } catch (err) {
         console.error('加载多数据源失败:', err);
         loadingDiv.innerHTML = `<p class="text-red-500 text-center">❌ 加载资源失败：${err.message || '未知错误'}</p>`;
@@ -458,10 +519,15 @@
       html += '</div>';
       typeNav.innerHTML = html;
 
+      // 为分类按钮添加点击事件监听器
       typeNav.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', () => {
+          if (!isVerified) {
+            // 如果未验证，点击无效
+            return;
+          }
           const type = btn.dataset.type;
-          showListView(type); // 移除验证逻辑，因为整个页面都已验证
+          showListView(type);
         });
       });
     }
@@ -470,9 +536,8 @@
       currentListType = type;
       document.getElementById('listTitle').textContent = `${type}清单`;
       mainContainer.classList.add('hidden');
-      navSection.classList.add('hidden'); // 隐藏导航区
+      navSection.classList.add('hidden');
       listView.classList.remove('hidden');
-      renderListPage(1);
     }
 
     function renderListPage(page) {
@@ -549,17 +614,28 @@
 
       div.innerHTML = html;
       div.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => renderListPage(parseInt(btn.dataset.page)));
+        btn.addEventListener('click', () => {
+          if (!isVerified) return; // 确保分页按钮也受验证保护
+          renderListPage(parseInt(btn.dataset.page));
+        });
       });
     }
 
     document.getElementById('backBtn').addEventListener('click', () => {
       listView.classList.add('hidden');
       mainContainer.classList.remove('hidden');
-      navSection.classList.remove('hidden'); // 返回时重新显示导航区
+      navSection.classList.remove('hidden');
+      if (!isVerified) {
+        // 如果返回时仍未验证，重新显示遮罩
+        showOverlay();
+      }
     });
 
     function performActualSearch(rawQuery) {
+      if (!isVerified) {
+        // 如果未验证，搜索无效
+        return;
+      }
       if (!resources || !rawQuery.trim()) {
         resultsDiv.innerHTML = '';
         noResultsDiv.classList.add('hidden');
@@ -606,6 +682,20 @@
       }
     }
 
+    // 为搜索按钮和回车事件添加验证检查
+    searchBtn.addEventListener('click', () => {
+      if (!isVerified) {
+        return; // 未验证时点击无效
+      }
+      handleUserSearch();
+    });
+    
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && isVerified) { // 仅在验证后回车才触发
+        handleUserSearch();
+      }
+    });
+
     function handleUserSearch() {
       const query = searchInput.value.trim();
       if (!query) {
@@ -615,13 +705,6 @@
       }
       performActualSearch(query);
     }
-
-    searchBtn.addEventListener('click', handleUserSearch);
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        handleUserSearch();
-      }
-    });
 
     // 页面加载完成后初始化
     window.addEventListener('DOMContentLoaded', () => {
