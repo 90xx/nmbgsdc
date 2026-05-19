@@ -1,139 +1,318 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>三字经</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doujiao Navigation</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: "Microsoft YaHei", sans-serif; background: #f8f9fa; padding: 20px; }
-    .container { max-width: 700px; margin: auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    textarea { width: 100%; height: 100px; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
-    .btns { text-align: center; margin: 15px 0; }
-    button { padding: 8px 20px; margin: 0 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-    .encrypt { background: #3b82f6; color: white; }
-    .decrypt { background: #10b981; color: white; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .nav-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nav-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .search-btn {
+      padding: 0.5rem 1rem;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-left: 0.5rem;
+    }
+    .search-btn:hover {
+      background-color: #2563eb;
+    }
+    .disabled-input {
+      background-color: #f9fafb;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+    .disabled-btn {
+      background-color: #d1d5db;
+      cursor: not-allowed;
+    }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h2>三字经</h2>
+<body class="bg-gray-50 min-h-screen py-12 px-4">
 
-    <textarea id="top" placeholder="在此输入或粘贴..."></textarea>
+  <!-- 访问码模态框 -->
+  <div id="accessModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4">
+      <h2 id="modalTitle" class="text-xl font-bold text-gray-800 text-center mb-4 flex items-center justify-center">
+        <span class="mr-2">🔒</span> 访问导航网站
+      </h2>
+      <p class="text-gray-600 text-center mb-6">请前往指定位置获取今日访问码：</p>
 
-    <div class="btns">
-      <button class="encrypt" onclick="encrypt()">🔒 加密</button>
-      <button class="decrypt" onclick="decrypt()">🔓 解密</button>
+      <a id="accessLink" href="#" target="_blank" rel="noopener noreferrer"
+         class="w-full block text-center py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition mb-6 flex items-center justify-center">
+        <span class="mr-2">👉</span> 点击获取 <span id="linkDate">2026-01-05</span> 访问码
+      </a>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm mb-2">请输入 4 位访问码：</label>
+        <input
+          id="accessCodeInput"
+          type="text"
+          placeholder="例如: ab12"
+          maxlength="4"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
+      </div>
+
+      <button id="verifyBtn" class="w-full py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg transition">
+        验证访问码
+      </button>
+
+      <p id="errorText" class="text-red-500 text-sm mt-4 text-center hidden"></p>
+    </div>
+  </div>
+
+  <!-- 主容器：导航区（验证后显示） -->
+  <div id="mainContainer" class="max-w-6xl mx-auto hidden">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center">
+      <span class="mr-2">🧭</span> Doujiao 导航
+    </h1>
+
+    <!-- 👋 新人必看入口 -->
+    <p class="text-center mb-8">
+      <a href="https://www.kdocs.cn/l/cfv01SPXoG7L" target="_blank" rel="noopener noreferrer"
+         class="inline-block px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-full shadow hover:shadow-md transition transform hover:-translate-y-0.5">
+        👋 新人必看指南
+      </a>
+    </p>
+
+    <!-- 🔔 更新通知（现在支持多行） -->
+    <div id="updateBanner" class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-800">
+      <div class="flex justify-between items-start">
+        <div id="updateText" class="font-medium space-y-1 text-sm">
+          <div>🎉 网站正式上线啦！</div>
+          <div>💡 每日访问码用于维护和更新。</div>
+        </div>
+        <button onclick="this.parentElement.parentElement.classList.add('hidden')" class="text-blue-600 hover:text-blue-800 ml-2">×</button>
+      </div>
     </div>
 
-    <textarea id="bottom" placeholder="结果将显示在这里..." readonly></textarea>
+    <!-- 导航网格 -->
+    <div id="navGrid" class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- 示例导航卡片 -->
+      <!-- 你可以根据需要复制、修改或删除这些卡片 -->
+      
+      <!-- 社交媒体 -->
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">社交媒体</h3>
+        <ul class="space-y-2">
+          <li><a href="https://weibo.com" target="_blank" class="text-blue-500 hover:underline">微博</a></li>
+          <li><a href="https://twitter.com" target="_blank" class="text-blue-500 hover:underline">Twitter</a></li>
+          <li><a href="https://www.zhihu.com" target="_blank" class="text-blue-500 hover:underline">知乎</a></li>
+        </ul>
+      </div>
+
+      <!-- 学习工具 -->
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">学习工具</h3>
+        <ul class="space-y-2">
+          <li><a href="https://www.google.com" target="_blank" class="text-blue-500 hover:underline">Google</a></li>
+          <li><a href="https://www.bilibili.com" target="_blank" class="text-blue-500 hover:underline">Bilibili</a></li>
+          <li><a href="https://www.coursera.org" target="_blank" class="text-blue-500 hover:underline">Coursera</a></li>
+        </ul>
+      </div>
+
+      <!-- 开发工具 -->
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">开发工具</h3>
+        <ul class="space-y-2">
+          <li><a href="https://github.com" target="_blank" class="text-blue-500 hover:underline">GitHub</a></li>
+          <li><a href="https://stackoverflow.com" target="_blank" class="text-blue-500 hover:underline">Stack Overflow</a></li>
+          <li><a href="https://chat.openai.com" target="_blank" class="text-blue-500 hover:underline">ChatGPT</a></li>
+        </ul>
+      </div>
+
+      <!-- 娱乐休闲 -->
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">娱乐休闲</h3>
+        <ul class="space-y-2">
+          <li><a href="https://www.netflix.com" target="_blank" class="text-blue-500 hover:underline">Netflix</a></li>
+          <li><a href="https://music.163.com" target="_blank" class="text-blue-500 hover:underline">网易云音乐</a></li>
+          <li><a href="https://www.youtube.com" target="_blank" class="text-blue-500 hover:underline">YouTube</a></li>
+        </ul>
+      </div>
+
+       <!-- 工具箱 -->
+       <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">在线工具</h3>
+        <ul class="space-y-2">
+          <li><a href="https://canva.com" target="_blank" class="text-blue-500 hover:underline">Canva设计</a></li>
+          <li><a href="https://tinypng.com" target="_blank" class="text-blue-500 hover:underline">TinyPNG压缩</a></li>
+          <li><a href="https://www.ilovepdf.com" target="_blank" class="text-blue-500 hover:underline">ILovePDF</a></li>
+        </ul>
+      </div>
+
+      <!-- 购物 -->
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">购物平台</h3>
+        <ul class="space-y-2">
+          <li><a href="https://www.taobao.com" target="_blank" class="text-blue-500 hover:underline">淘宝</a></li>
+          <li><a href="https://www.jd.com" target="_blank" class="text-blue-500 hover:underline">京东</a></li>
+          <li><a href="https://www.amazon.com" target="_blank" class="text-blue-500 hover:underline">Amazon</a></li>
+        </ul>
+      </div>
+
+      <!-- 生活服务 -->
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">生活服务</h3>
+        <ul class="space-y-2">
+          <li><a href="https://ditu.amap.com" target="_blank" class="text-blue-500 hover:underline">高德地图</a></li>
+          <li><a href="https://www.meituan.com" target="_blank" class="text-blue-500 hover:underline">美团</a></li>
+          <li><a href="https://www.12306.cn" target="_blank" class="text-blue-500 hover:underline">12306</a></li>
+        </ul>
+      </div>
+
+      <!-- 资讯门户 -->
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">资讯门户</h3>
+        <ul class="space-y-2">
+          <li><a href="https://news.sina.com.cn" target="_blank" class="text-blue-500 hover:underline">新浪新闻</a></li>
+          <li><a href="https://www.huxiu.com" target="_blank" class="text-blue-500 hover:underline">虎嗅</a></li>
+          <li><a href="https://sspai.com" target="_blank" class="text-blue-500 hover:underline">少数派</a></li>
+        </ul>
+      </div>
+
+    </div>
   </div>
 
   <script>
-    // ✅ 64 条严格无重复三字句（已去重！）
-    const phrases = [
-      '人之初', '性本善', '性相近', '习相远', '苟不教', '性乃迁', '教之道', '贵以专',
-      '昔孟母', '择邻处', '断机杼', '窦燕山', '有义方', '教五子', '名俱扬', '父之过',
-      '师之惰', '非所宜', '老何为', '不成器', '不知义', '方少时', '亲师友', '习礼仪',
-      '香九龄', '能温席', '所当执', '融四岁', '能让梨', '弟于长', '宜先知', '首孝悌',
-      '次见闻', '知某数', '识某文', '一而十', '十而百', '百而千', '千而万', '三才者',
-      '天地人', '三光者', '日月星', '三纲者', '君臣义', '父子亲', '夫妇顺', '曰春夏',
-      '曰秋冬', '此四时', '运不穷', '曰南北', '曰西东', '此四方', '应乎中', '养不教',
-      '教不严', '玉不琢', '为人子', '幼不学', '子不学', '民为贵', '社稷次', '君为轻'
-    ];
+    // === 配置 ===
+    // 定义每日访问码和对应的获取链接
+    const ACCESS_MAP = {
+      '2026-05-20': { link: 'https://example.com/today', code: '2615' }, // 今天的示例
+      '2026-05-21': { link: 'https://example.com/tomorrow', code: '1234' },
+      '2026-01-06': { link: 'https://pan.quark.cn/s/fbabd589546a', code: '1470' },
+      '2026-01-07': { link: 'https://pan.quark.cn/s/1a2c9a75ca2d', code: '7231' },
+      '2026-01-08': { link: 'https://pan.quark.cn/s/aa0b8d53620a', code: '2048' },
+      '2026-01-09': { link: 'https://pan.quark.cn/s/2da4c170bede', code: '3388' },
+      '2026-01-10': { link: 'https://pan.quark.cn/s/ffd272d299ea', code: '7478' },
+      '2026-01-11': { link: 'https://pan.quark.cn/s/b6c0fc9d4187', code: '1574' },
+      '2026-01-12': { link: 'https://pan.quark.cn/s/031a59f2e250', code: '7865' },
+      '2026-01-13': { link: 'https://pan.quark.cn/s/5455ceee2f80', code: '6855' },
+      '2026-01-14': { link: 'https://pan.quark.cn/s/412ae569c058', code: '3567' },
+      '2026-01-15': { link: 'https://pan.quark.cn/s/7ca20e801c9d', code: '3385' },
+      '2026-01-16': { link: 'https://pan.quark.cn/s/9fe9a95bc5f2', code: '1727' },
+      '2026-01-17': { link: 'https://pan.quark.cn/s/bb6cd1e53d5b', code: '6721' },
+      '2026-01-18': { link: 'https://pan.quark.cn/s/5f17a9a642fb', code: '2824' },
+      '2026-01-19': { link: 'https://pan.quark.cn/s/61cf986dfc4b', code: '6344' },
+      '2026-01-20': { link: 'https://pan.quark.cn/s/8b0f23aba29c', code: '8340' },
+      '2026-01-21': { link: 'https://pan.quark.cn/s/d38ad59e59dd', code: '5558' },
+      '2026-01-22': { link: 'https://pan.quark.cn/s/ebfe6725e44b', code: '1637' },
+      '2026-01-23': { link: 'https://pan.quark.cn/s/707e11322f75', code: '8600' },
+      '2026-01-24': { link: 'https://pan.quark.cn/s/219e178ada01', code: '3876' },
+      '2026-01-25': { link: 'https://pan.quark.cn/s/7ee5a0d569f3', code: '3234' },
+      '2026-01-26': { link: 'https://pan.quark.cn/s/56f2d33a9d79', code: '5207' }
+    };
 
-    // 验证无重复
-    if (new Set(phrases).size !== 64) {
-      alert("错误：格言有重复！");
+    // DOM Elements
+    const accessModal = document.getElementById('accessModal');
+    const mainContainer = document.getElementById('mainContainer');
+    const accessCodeInput = document.getElementById('accessCodeInput');
+    const verifyBtn = document.getElementById('verifyBtn');
+    const accessLink = document.getElementById('accessLink');
+    const linkDate = document.getElementById('linkDate');
+    const errorText = document.getElementById('errorText');
+
+    // 获取北京时间的函数
+    function getBeijingDate() {
+      const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      const beijingTime = new Date(utc + 8 * 3600000);
+      return beijingTime.toLocaleDateString('sv'); // 'sv' 格式为 YYYY-MM-DD
     }
 
-    // 将字符串转为 UTF-8 字节数组
-    function stringToBytes(str) {
-      const utf8 = new TextEncoder().encode(str);
-      return Array.from(utf8);
+    // 检查是否已通过今日验证
+    function checkVerificationStatus() {
+      const today = getBeijingDate();
+      const lastVerified = localStorage.getItem('lastVerifiedNavDate');
+      return lastVerified === today;
     }
 
-    // 将字节数组转为 64 进制索引数组
-    function bytesToBase64Indices(bytes) {
-      if (bytes.length === 0) return [];
-      let indices = [];
-      let value = 0;
-      let bits = 0;
+    // 设置今日已验证状态
+    function setVerificationStatus() {
+      const today = getBeijingDate();
+      localStorage.setItem('lastVerifiedNavDate', today);
+    }
 
-      for (let byte of bytes) {
-        value = (value << 8) | byte;
-        bits += 8;
-        while (bits >= 6) {
-          bits -= 6;
-          indices.push((value >> bits) & 63);
+    // 初始化页面
+    function initPage() {
+        if (checkVerificationStatus()) {
+            // 如果已验证，则直接显示导航页
+            accessModal.style.display = 'none';
+            mainContainer.classList.remove('hidden');
+        } else {
+            // 否则，显示访问码模态框
+            accessModal.style.display = 'flex';
+            // 更新模态框中的日期和链接
+            updateAccessInfo();
         }
-      }
-      if (bits > 0) {
-        indices.push((value << (6 - bits)) & 63);
-      }
-      return indices;
     }
 
-    // 将 64 进制索引数组转回字节数组
-    function base64IndicesToBytes(indices) {
-      let bytes = [];
-      let value = 0;
-      let bits = 0;
-
-      for (let idx of indices) {
-        value = (value << 6) | idx;
-        bits += 6;
-        while (bits >= 8) {
-          bits -= 8;
-          bytes.push((value >> bits) & 255);
+    // 更新模态框中的日期和链接
+    function updateAccessInfo() {
+        const today = getBeijingDate();
+        const record = ACCESS_MAP[today];
+        
+        if (record) {
+            linkDate.textContent = today;
+            accessLink.href = record.link;
+        } else {
+            // 如果当天没有配置，默认显示一个提示
+            linkDate.textContent = today;
+            accessLink.href = '#'; // 或者指向一个默认的提示页面
+            console.warn(`未配置 ${today} 的访问码和链接。`);
         }
-      }
-      // 忽略最后不足 8 位的填充
-      return bytes;
     }
 
-    // 将字节数组转为字符串
-    function bytesToString(bytes) {
-      const uint8 = new Uint8Array(bytes);
-      return new TextDecoder().decode(uint8);
-    }
+    // 验证访问码
+    verifyBtn.addEventListener('click', () => {
+        const input = accessCodeInput.value.trim();
+        const today = getBeijingDate();
+        const record = ACCESS_MAP[today];
+        errorText.classList.add('hidden');
 
-    function encrypt() {
-      const input = document.getElementById('top').value;
-      if (!input) { alert('请输入内容'); return; }
-
-      try {
-        const bytes = stringToBytes(input);
-        const indices = bytesToBase64Indices(bytes);
-        const result = indices.map(i => phrases[i]).join(' ');
-        document.getElementById('bottom').value = result;
-      } catch (e) {
-        alert('加密失败');
-      }
-    }
-
-    function decrypt() {
-      const input = document.getElementById('top').value;
-      if (!input) { alert('请粘贴三字经'); return; }
-
-      const words = input.split(/\s+/).filter(w => w);
-      const indices = [];
-
-      for (let word of words) {
-        const idx = phrases.indexOf(word);
-        if (idx === -1) {
-          alert('无效片段：' + word);
-          return;
+        if (!record) {
+            errorText.textContent = `系统错误：未配置 ${today} 的访问码。`;
+            errorText.classList.remove('hidden');
+            return;
         }
-        indices.push(idx);
-      }
 
-      try {
-        const bytes = base64IndicesToBytes(indices);
-        const original = bytesToString(bytes);
-        document.getElementById('bottom').value = original;
-      } catch (e) {
-        alert('解密失败');
-      }
-    }
+        if (input === record.code) {
+            setVerificationStatus(); // 记录验证状态
+            accessModal.style.display = 'none'; // 关闭模态框
+            mainContainer.classList.remove('hidden'); // 显示导航内容
+            accessCodeInput.value = ''; // 清空输入框
+        } else {
+            errorText.textContent = '访问码错误，请重新输入。';
+            errorText.classList.remove('hidden');
+        }
+    });
+
+    // 允许在输入框按回车键验证
+    accessCodeInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            verifyBtn.click();
+        }
+    });
+
+    // 页面加载完成后初始化
+    window.addEventListener('DOMContentLoaded', () => {
+        initPage();
+    });
+
   </script>
 </body>
 </html>
