@@ -93,7 +93,7 @@
     <p class="text-white text-xl font-bold">请先输入访问码</p>
   </div>
 
-  <!-- 主容器：仅包含标题、新人指南、分类导航 -->
+  <!-- 主容器：搜索区（移入分类区域） -->
   <div id="mainContainer" class="max-w-3xl mx-auto">
     <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center">
       <span class="mr-2">🔍</span> Doujiao
@@ -112,87 +112,11 @@
       <!-- 动态生成按钮 -->
     </div>
 
-    <!-- 导航区 -->
-    <div id="navSection" class="mt-12">
-      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center">
-        <span class="mr-2">🧭</span> 精选导航
-      </h2>
+    <!-- ⛔️ 主页的搜索框已被移除 -->
 
-      <div id="navGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- 示例导航卡片 -->
-        <div class="nav-card bg-white p-6 rounded-xl shadow">
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">社交媒体</h3>
-          <ul class="space-y-2">
-            <li><a href="https://weibo.com" target="_blank" class="text-blue-500 hover:underline">微博</a></li>
-            <li><a href="https://twitter.com" target="_blank" class="text-blue-500 hover:underline">Twitter</a></li>
-            <li><a href="https://www.zhihu.com" target="_blank" class="text-blue-500 hover:underline">知乎</a></li>
-          </ul>
-        </div>
-
-        <div class="nav-card bg-white p-6 rounded-xl shadow">
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">学习工具</h3>
-          <ul class="space-y-2">
-            <li><a href="https://www.google.com" target="_blank" class="text-blue-500 hover:underline">Google</a></li>
-            <li><a href="https://www.bilibili.com" target="_blank" class="text-blue-500 hover:underline">Bilibili</a></li>
-            <li><a href="https://www.coursera.org" target="_blank" class="text-blue-500 hover:underline">Coursera</a></li>
-          </ul>
-        </div>
-
-        <div class="nav-card bg-white p-6 rounded-xl shadow">
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">开发工具</h3>
-          <ul class="space-y-2">
-            <li><a href="https://github.com" target="_blank" class="text-blue-500 hover:underline">GitHub</a></li>
-            <li><a href="https://stackoverflow.com" target="_blank" class="text-blue-500 hover:underline">Stack Overflow</a></li>
-            <li><a href="https://chat.openai.com" target="_blank" class="text-blue-500 hover:underline">ChatGPT</a></li>
-          </ul>
-        </div>
-
-        <div class="nav-card bg-white p-6 rounded-xl shadow">
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">娱乐休闲</h3>
-          <ul class="space-y-2">
-            <li><a href="https://www.netflix.com" target="_blank" class="text-blue-500 hover:underline">Netflix</a></li>
-            <li><a href="https://music.163.com" target="_blank" class="text-blue-500 hover:underline">网易云音乐</a></li>
-            <li><a href="https://www.youtube.com" target="_blank" class="text-blue-500 hover:underline">YouTube</a></li>
-          </ul>
-        </div>
-
-        <div class="nav-card bg-white p-6 rounded-xl shadow">
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">在线工具</h3>
-          <ul class="space-y-2">
-            <li><a href="https://canva.com" target="_blank" class="text-blue-500 hover:underline">Canva设计</a></li>
-            <li><a href="https://tinypng.com" target="_blank" class="text-blue-500 hover:underline">TinyPNG压缩</a></li>
-            <li><a href="https://www.ilovepdf.com" target="_blank" class="text-blue-500 hover:underline">ILovePDF</a></li>
-          </ul>
-        </div>
-
-        <div class="nav-card bg-white p-6 rounded-xl shadow">
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">购物平台</h3>
-          <ul class="space-y-2">
-            <li><a href="https://www.taobao.com" target="_blank" class="text-blue-500 hover:underline">淘宝</a></li>
-            <li><a href="https://www.jd.com" target="_blank" class="text-blue-500 hover:underline">京东</a></li>
-            <li><a href="https://www.amazon.com" target="_blank" class="text-blue-500 hover:underline">Amazon</a></li>
-          </ul>
-        </div>
-
-        <div class="nav-card bg-white p-6 rounded-xl shadow">
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">生活服务</h3>
-          <ul class="space-y-2">
-            <li><a href="https://ditu.amap.com" target="_blank" class="text-blue-500 hover:underline">高德地图</a></li>
-            <li><a href="https://www.meituan.com" target="_blank" class="text-blue-500 hover:underline">美团</a></li>
-            <li><a href="https://www.12306.cn" target="_blank" class="text-blue-500 hover:underline">12306</a></li>
-          </ul>
-        </div>
-
-        <div class="nav-card bg-white p-6 rounded-xl shadow">
-          <h3 class="text-lg font-semibold text-gray-800 mb-2">资讯门户</h3>
-          <ul class="space-y-2">
-            <li><a href="https://news.sina.com.cn" target="_blank" class="text-blue-500 hover:underline">新浪新闻</a></li>
-            <li><a href="https://www.huxiu.com" target="_blank" class="text-blue-500 hover:underline">虎嗅</a></li>
-            <li><a href="https://sspai.com" target="_blank" class="text-blue-500 hover:underline">少数派</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <div id="loading" class="text-center text-gray-500 mt-6 hidden">正在加载资源库...</div>
+    <div id="results" class="mt-6 space-y-4"></div>
+    <div id="noResults" class="text-center text-gray-500 mt-8 hidden">未找到相关资源 😢</div>
   </div>
 
   <!-- 清单视图（初始隐藏） -->
@@ -202,7 +126,7 @@
       <button id="backBtn" class="text-blue-500 hover:underline">← 返回</button>
     </div>
 
-    <!-- ✅ 搜索框现在放在这里：每个分类清单页的顶部 -->
+    <!-- ✅ 搜索框移到清单页顶部 -->
     <div class="flex flex-col md:flex-row gap-2 items-center justify-center mb-6">
       <input
         id="listSearchInput"
@@ -217,12 +141,98 @@
     <div id="listPagination" class="mt-8 flex justify-center space-x-2"></div>
   </div>
 
+  <!-- 导航区 -->
+  <div id="navSection" class="max-w-6xl mx-auto mt-12">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center">
+      <span class="mr-2">🧭</span> 精选导航
+    </h2>
+
+    <div id="navGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- 示例导航卡片 -->
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">社交媒体</h3>
+        <ul class="space-y-2">
+          <li><a href="https://weibo.com" target="_blank" class="text-blue-500 hover:underline">微博</a></li>
+          <li><a href="https://twitter.com" target="_blank" class="text-blue-500 hover:underline">Twitter</a></li>
+          <li><a href="https://www.zhihu.com" target="_blank" class="text-blue-500 hover:underline">知乎</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">学习工具</h3>
+        <ul class="space-y-2">
+          <li><a href="https://www.google.com" target="_blank" class="text-blue-500 hover:underline">Google</a></li>
+          <li><a href="https://www.bilibili.com" target="_blank" class="text-blue-500 hover:underline">Bilibili</a></li>
+          <li><a href="https://www.coursera.org" target="_blank" class="text-blue-500 hover:underline">Coursera</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">开发工具</h3>
+        <ul class="space-y-2">
+          <li><a href="https://github.com" target="_blank" class="text-blue-500 hover:underline">GitHub</a></li>
+          <li><a href="https://stackoverflow.com" target="_blank" class="text-blue-500 hover:underline">Stack Overflow</a></li>
+          <li><a href="https://chat.openai.com" target="_blank" class="text-blue-500 hover:underline">ChatGPT</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">娱乐休闲</h3>
+        <ul class="space-y-2">
+          <li><a href="https://www.netflix.com" target="_blank" class="text-blue-500 hover:underline">Netflix</a></li>
+          <li><a href="https://music.163.com" target="_blank" class="text-blue-500 hover:underline">网易云音乐</a></li>
+          <li><a href="https://www.youtube.com" target="_blank" class="text-blue-500 hover:underline">YouTube</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">在线工具</h3>
+        <ul class="space-y-2">
+          <li><a href="https://canva.com" target="_blank" class="text-blue-500 hover:underline">Canva设计</a></li>
+          <li><a href="https://tinypng.com" target="_blank" class="text-blue-500 hover:underline">TinyPNG压缩</a></li>
+          <li><a href="https://www.ilovepdf.com" target="_blank" class="text-blue-500 hover:underline">ILovePDF</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">购物平台</h3>
+        <ul class="space-y-2">
+          <li><a href="https://www.taobao.com" target="_blank" class="text-blue-500 hover:underline">淘宝</a></li>
+          <li><a href="https://www.jd.com" target="_blank" class="text-blue-500 hover:underline">京东</a></li>
+          <li><a href="https://www.amazon.com" target="_blank" class="text-blue-500 hover:underline">Amazon</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">生活服务</h3>
+        <ul class="space-y-2">
+          <li><a href="https://ditu.amap.com" target="_blank" class="text-blue-500 hover:underline">高德地图</a></li>
+          <li><a href="https://www.meituan.com" target="_blank" class="text-blue-500 hover:underline">美团</a></li>
+          <li><a href="https://www.12306.cn" target="_blank" class="text-blue-500 hover:underline">12306</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-card bg-white p-6 rounded-xl shadow">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">资讯门户</h3>
+        <ul class="space-y-2">
+          <li><a href="https://news.sina.com.cn" target="_blank" class="text-blue-500 hover:underline">新浪新闻</a></li>
+          <li><a href="https://www.huxiu.com" target="_blank" class="text-blue-500 hover:underline">虎嗅</a></li>
+          <li><a href="https://sspai.com" target="_blank" class="text-blue-500 hover:underline">少数派</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
   <script>
     // === 配置 ===
     const STOP_WORDS = ['小说', '漫画'];
+    // 定义所有网盘字段
     const NET_DISK_FIELDS = ['kk', 'bd', 'uc', 'xl', 'yd', 'lz'];
+    // 定义所有提取码字段（实际是分享页链接）
     const CODE_FIELDS = ['kkm', 'bdm', 'ucm', 'xlm', 'ydm'];
 
+    // 网盘字段 → 中文名映射
     const NET_DISK_NAMES = {
       'kk': '夸克',
       'bd': '百度',
@@ -233,7 +243,7 @@
     };
 
     const ACCESS_MAP = {
-      '2026-05-20': { link: 'https://example.com/today', code: '2615' },
+      '2026-05-20': { link: 'https://example.com/today', code: '2615' }, // 今天的示例
       '2026-05-21': { link: 'https://example.com/tomorrow', code: '1234' },
       '2026-01-06': { link: 'https://pan.quark.cn/s/fbabd589546a', code: '1470' },
       '2026-01-07': { link: 'https://pan.quark.cn/s/1a2c9a75ca2d', code: '7231' },
@@ -251,10 +261,17 @@
       '2026-01-19': { link: 'https://pan.quark.cn/s/61cf986dfc4b', code: '6344' },
       '2026-01-20': { link: 'https://pan.quark.cn/s/8b0f23aba29c', code: '8340' },
       '2026-01-21': { link: 'https://pan.quark.cn/s/d38ad59e59dd', code: '5558' },
-      <your data here>
+      '2026-01-22': { link: 'https://pan.quark.cn/s/ebfe6725e44b', code: '1637' },
+      '2026-01-23': { link: 'https://pan.quark.cn/s/707e11322f75', code: '8600' },
+      '2026-01-24': { link: 'https://pan.quark.cn/s/219e178ada01', code: '3876' },
+      '2026-01-25': { link: 'https://pan.quark.cn/s/7ee5a0d569f3', code: '3234' },
+      '2026-01-26': { link: 'https://pan.quark.cn/s/56f2d33a9d79', code: '5207' }
     };
 
     // DOM
+    const loadingDiv = document.getElementById('loading');
+    const resultsDiv = document.getElementById('results');
+    const noResultsDiv = document.getElementById('noResults');
     const mainContainer = document.getElementById('mainContainer');
     const listView = document.getElementById('listView');
     const typeNav = document.getElementById('typeNav');
@@ -262,16 +279,29 @@
     const navSection = document.getElementById('navSection');
     const overlay = document.getElementById('overlay');
 
-    // 新增：清单页的搜索框
+    // 新增：清单页的搜索框和按钮
     const listSearchInput = document.getElementById('listSearchInput');
     const listSearchBtn = document.getElementById('listSearchBtn');
 
     let resources = [];
     let currentListType = null;
     const ITEMS_PER_PAGE = 20;
-    let isVerified = false;
+    let isVerified = false; // 全局验证状态标志
 
-    // 获取北京时间
+    // 检查是否已通过今日验证
+    function checkVerificationStatus() {
+      const today = getBeijingDate();
+      const lastVerified = localStorage.getItem('lastVerifiedDate');
+      return lastVerified === today;
+    }
+
+    // 设置今日已验证状态
+    function setVerificationStatus() {
+      const today = getBeijingDate();
+      localStorage.setItem('lastVerifiedDate', today);
+    }
+
+    // 获取北京时间的函数
     function getBeijingDate() {
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
@@ -279,63 +309,68 @@
       return beijingTime.toLocaleDateString('sv');
     }
 
-    // 检查验证状态
-    function checkVerificationStatus() {
-      const today = getBeijingDate();
-      const lastVerified = localStorage.getItem('lastVerifiedDate');
-      return lastVerified === today;
-    }
-
-    function setVerificationStatus() {
-      const today = getBeijingDate();
-      localStorage.setItem('lastVerifiedDate', today);
-    }
-
-    // 显示/隐藏遮罩
+    // 显示遮罩层，禁用交互
     function showOverlay() {
         overlay.classList.remove('hidden');
+        // 禁用分类按钮的点击事件
         typeNav.querySelectorAll('button').forEach(btn => {
             btn.style.pointerEvents = 'none';
             btn.style.opacity = '0.6';
         });
+        // 禁用导航链接的点击事件
         navSection.querySelectorAll('a').forEach(link => {
             link.style.pointerEvents = 'none';
             link.style.opacity = '0.6';
         });
     }
 
+    // 隐藏遮罩层，启用交互
     function hideOverlay() {
         overlay.classList.add('hidden');
+        // 启用分类按钮的点击事件
         typeNav.querySelectorAll('button').forEach(btn => {
             btn.style.pointerEvents = 'auto';
             btn.style.opacity = '1';
         });
+        // 启用导航链接的点击事件
         navSection.querySelectorAll('a').forEach(link => {
             link.style.pointerEvents = 'auto';
             link.style.opacity = '1';
         });
     }
 
-    // 初始化
+    // 初始化页面：检查验证状态
     function initPage() {
         if (checkVerificationStatus()) {
+            // 如果已验证
             isVerified = true;
             accessModal.style.display = 'none';
-            hideOverlay();
+            hideOverlay(); // 隐藏遮罩，启用功能
+            // 然后加载数据
             loadData();
         } else {
+            // 如果未验证
             isVerified = false;
             accessModal.style.display = 'flex';
-            showOverlay();
+            showOverlay(); // 显示遮罩，禁用功能
+            // 更新模态框中的日期和链接
             updateAccessInfo();
         }
     }
 
+    // 更新模态框中的日期和链接
     function updateAccessInfo() {
         const today = getBeijingDate();
         const record = ACCESS_MAP[today];
-        document.getElementById('linkDate').textContent = today;
-        document.getElementById('accessLink').href = record?.link || '#';
+        
+        if (record) {
+            document.getElementById('linkDate').textContent = today;
+            document.getElementById('accessLink').href = record.link;
+        } else {
+            document.getElementById('linkDate').textContent = today;
+            document.getElementById('accessLink').href = '#';
+            console.warn(`未配置 ${today} 的访问码和链接。`);
+        }
     }
 
     // 验证访问码
@@ -352,12 +387,14 @@
       }
 
       if (input === record.code) {
-        setVerificationStatus();
-        isVerified = true;
-        accessModal.style.display = 'none';
-        hideOverlay();
-        document.getElementById('accessCodeInput').value = '';
-        errorText.classList.add('hidden');
+        setVerificationStatus(); // 记录验证状态
+        isVerified = true; // 更新全局状态
+        accessModal.style.display = 'none'; // 关闭模态框
+        hideOverlay(); // 隐藏遮罩，启用功能
+        document.getElementById('accessCodeInput').value = ''; // 清空输入框
+        errorText.classList.add('hidden'); // 隐藏错误信息
+
+        // 验证成功后开始加载数据
         loadData();
       } else {
         errorText.textContent = '访问码错误，请重新输入。';
@@ -365,9 +402,66 @@
       }
     });
 
-    // 加载数据（关键修复）
+    // 允许在输入框按回车键验证
+    document.getElementById('accessCodeInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            document.getElementById('verifyBtn').click();
+        }
+    });
+
+    function getRandomValidLinks(item) {
+      const validDisks = NET_DISK_FIELDS
+        .filter(field => item[field] && typeof item[field] === 'string' && item[field].trim() !== '' && item[field].startsWith('http'))
+        .map(field => ({
+          type: field === 'lz' ? 'lz' : 'normal',
+          field,
+          name: NET_DISK_NAMES[field] || field.toUpperCase(),
+          url: item[field]
+        }));
+
+      if (validDisks.length === 0) return [];
+
+      const randomIndex = Math.floor(Math.random() * validDisks.length);
+      const selected = validDisks[randomIndex];
+
+      // 如果是 lz，收集所有有效的分享页链接
+      let shareUrl = null;
+      if (selected.type === 'lz') {
+        const validSharePages = CODE_FIELDS
+          .filter(field => item[field] && typeof item[field] === 'string' && item[field].trim() !== '' && item[field].startsWith('http'))
+          .map(field => item[field]);
+
+        if (validSharePages.length > 0) {
+          // 随机选一个分享页链接
+          const randomShareIndex = Math.floor(Math.random() * validSharePages.length);
+          shareUrl = validSharePages[randomShareIndex];
+        }
+      } else {
+        // 如果不是 lz，就不需要分享页链接
+        shareUrl = null;
+      }
+
+      return [{
+        mainType: selected.type,
+        mainText: selected.name,
+        mainUrl: selected.url,
+        hasLz: !!item.lz && typeof item.lz === 'string' && item.lz.trim() !== '' && item.lz.startsWith('http'),
+        shareUrl: shareUrl
+      }];
+    }
+
+    function cleanQuery(query) {
+      let cleaned = query;
+      STOP_WORDS.forEach(word => {
+        const regex = new RegExp(word, 'g');
+        cleaned = cleaned.replace(regex, '');
+      });
+      return cleaned.trim();
+    }
+
     async function loadData() {
       if (resources.length > 0) return;
+      loadingDiv.classList.remove('hidden');
 
       const dataFiles = [
         './thai-novel.json',
@@ -379,11 +473,8 @@
           dataFiles.map(url => fetch(url + '?t=' + Date.now()))
         );
 
-        // 🔥 关键修复：检查所有响应是否成功
-        for (let i = 0; i < responses.length; i++) {
-          if (!responses[i].ok) {
-            throw new Error(`❌ 加载失败: ${dataFiles[i]} (HTTP ${responses[i].status})`);
-          }
+        for (const res of responses) {
+          if (!res.ok) throw new Error(`加载失败: ${res.url}`);
         }
 
         const allData = await Promise.all(responses.map(res => res.json()));
@@ -394,36 +485,21 @@
             resources.push(...data);
           } else if (Array.isArray(data.items)) {
             resources.push(...data.items);
-          } else {
-            console.warn(`警告: 数据源 ${dataFiles[i]} 格式不支持，跳过。`);
           }
         }
 
-        console.log(`✅ 成功加载 ${resources.length} 条资源`);
+        loadingDiv.classList.add('hidden');
         renderTypeNav();
-
       } catch (err) {
-        console.error('❌ 加载数据失败:', err);
-        // 在清单页显示友好错误信息
-        const errorMsg = `<div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
-          <p class="text-red-700 font-medium">⚠️ 数据加载失败</p>
-          <p class="text-red-600 text-sm mt-1">${err.message}</p>
-          <p class="text-red-500 text-xs mt-2">请检查文件是否存在：thai-novel.json, data2.json</p>
-        </div>`;
-        document.getElementById('groupedList').innerHTML = errorMsg;
-        // 即使失败，也渲染分类按钮，让用户知道有内容
-        renderTypeNav();
+        console.error('加载多数据源失败:', err);
+        loadingDiv.innerHTML = `<p class="text-red-500 text-center">❌ 加载资源失败：${err.message || '未知错误'}</p>`;
       }
     }
 
-    // 渲染分类按钮
     function renderTypeNav() {
       const types = [...new Set(resources.map(item => item.type).filter(t => t))];
       typeNav.innerHTML = '';
-      if (types.length === 0) {
-        typeNav.innerHTML = '<p class="text-gray-500">暂无分类</p>';
-        return;
-      }
+      if (types.length === 0) return;
 
       let html = '<div class="flex flex-wrap justify-center gap-2">';
       types.forEach(type => {
@@ -436,102 +512,117 @@
       html += '</div>';
       typeNav.innerHTML = html;
 
+      // 为分类按钮添加点击事件监听器
       typeNav.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', () => {
-          if (!isVerified) return;
+          if (!isVerified) {
+            // 如果未验证，点击无效
+            return;
+          }
           const type = btn.dataset.type;
           showListView(type);
         });
       });
     }
 
-    // ✅ 展示清单页
     function showListView(type) {
       currentListType = type;
       document.getElementById('listTitle').textContent = `${type}清单`;
-
       mainContainer.classList.add('hidden');
       navSection.classList.add('hidden');
       listView.classList.remove('hidden');
 
-      // ✅ 为清单页的搜索框绑定事件
+      // ✅ 绑定清单页搜索事件
+      listSearchBtn.removeEventListener('click', handleListSearch); // 防止重复绑定
       listSearchBtn.addEventListener('click', handleListSearch);
-      listSearchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleListSearch();
-      });
+      listSearchInput.removeEventListener('keypress', handleListSearchOnEnter); // 防止重复绑定
+      listSearchInput.addEventListener('keypress', handleListSearchOnEnter);
 
       renderListPage(1);
     }
 
-    // ✅ 清单页内的搜索逻辑
+    // ✅ 清单页内搜索函数
     function handleListSearch() {
-      if (!isVerified) return;
-      const query = listSearchInput.value.trim();
-      if (!query) {
-        renderListPage(1); // 重置为第1页
-        return;
-      }
-
-      const cleanedQuery = cleanQuery(query);
-      const items = resources.filter(item => item.type === currentListType);
-      const hits = items.filter(item => {
-        const title = (item.title || '').toLowerCase().replace(/[\s\u2000-\u206F]/g, '');
-        const q = cleanedQuery.toLowerCase().replace(/[\s\u2000-\u206F]/g, '');
-        return title.includes(q);
-      });
-
-      // 构建分组数据
-      const groups = {};
-      hits.forEach(item => {
-        const initial = (item.initial || '#').toUpperCase();
-        if (!groups[initial]) groups[initial] = [];
-        groups[initial].push(item);
-      });
-
-      const sortedInitials = Object.keys(groups).sort();
-      const allEntries = [];
-      sortedInitials.forEach(initial => {
-        allEntries.push({ type: 'header', initial });
-        groups[initial].forEach(item => allEntries.push({ type: 'item', data: item }));
-      });
-
-      // 渲染结果
-      renderGroupedEntries(allEntries);
-    }
-
-    // 渲染分组条目（用于搜索和分页）
-    function renderGroupedEntries(entries) {
-      let html = '';
-      entries.forEach(entry => {
-        if (entry.type === 'header') {
-          html += `<h3 class="text-xl font-bold text-gray-700 border-l-4 border-blue-500 pl-2">${entry.initial}</h3>`;
-        } else {
-          const item = entry.data;
-          const links = getRandomValidLinks(item);
-
-          html += `<div class="bg-white p-4 rounded-lg shadow">
-            <h4 class="font-semibold text-blue-600">${item.title}</h4>`;
-
-          if (links.length > 0) {
-            const link = links[0];
-            html += `<a href="${link.mainUrl}" target="_blank" class="block mt-1 text-green-600">${link.mainText}</a>`;
-            if (link.hasLz && link.mainType === 'lz' && link.shareUrl) {
-              html += `<a href="${link.shareUrl}" target="_blank" class="block mt-1 text-green-600">提取码: ${link.shareUrl}</a>`;
-            }
-          } else {
-            html += `<p class="text-gray-500 mt-1">暂无有效链接</p>`;
-          }
-
-          html += `</div>`;
+        if (!isVerified) return;
+        const rawQuery = listSearchInput.value.trim();
+        if (!rawQuery) {
+            // 如果清空搜索框，则恢复显示当前分类的所有内容
+            renderListPage(1);
+            return;
         }
-      });
+        const query = cleanQuery(rawQuery);
+        if (!query) {
+            listSearchInput.value = '';
+            renderListPage(1);
+            return;
+        }
 
-      document.getElementById('groupedList').innerHTML = html || '<p class="text-center text-gray-500">暂无资源</p>';
-      // 分页逻辑保持不变，但这里我们简化处理：搜索时不显示分页（因为结果少）
-      document.getElementById('listPagination').innerHTML = '';
+        const items = resources.filter(item => item.type === currentListType);
+        const hits = items.filter(item => {
+            const title = (item.title || '').toLowerCase().replace(/[\s\u2000-\u206F]/g, '');
+            const q = query.toLowerCase().replace(/[\s\u2000-\u206F]/g, '');
+            return title.includes(q);
+        });
+
+        // 构建分组数据
+        const groups = {};
+        hits.forEach(item => {
+            const initial = (item.initial || '#').toUpperCase();
+            if (!groups[initial]) groups[initial] = [];
+            groups[initial].push(item);
+        });
+
+        const sortedInitials = Object.keys(groups).sort();
+        const allEntries = [];
+        sortedInitials.forEach(initial => {
+            allEntries.push({ type: 'header', initial });
+            groups[initial].forEach(item => allEntries.push({ type: 'item', data: item }));
+        });
+
+        // 渲染结果
+        renderGroupedEntries(allEntries);
+        // 搜索结果不显示分页
+        document.getElementById('listPagination').classList.add('hidden');
     }
 
-    // 分页渲染（原逻辑，供非搜索场景使用）
+    // ✅ 清单页内搜索回车事件
+    function handleListSearchOnEnter(e) {
+        if (e.key === 'Enter') {
+            handleListSearch();
+        }
+    }
+
+    // ✅ 渲染分组条目（用于搜索和分页）
+    function renderGroupedEntries(entries) {
+        let html = '';
+        entries.forEach(entry => {
+            if (entry.type === 'header') {
+                html += `<h3 class="text-xl font-bold text-gray-700 border-l-4 border-blue-500 pl-2">${entry.initial}</h3>`;
+            } else {
+                const item = entry.data;
+                const links = getRandomValidLinks(item);
+
+                html += `<div class="bg-white p-4 rounded-lg shadow">
+                    <h4 class="font-semibold text-blue-600">${item.title}</h4>`;
+
+                if (links.length > 0) {
+                    const link = links[0];
+                    html += `<a href="${link.mainUrl}" target="_blank" class="block mt-1 text-green-600">${link.mainText}</a>`;
+                    if (link.hasLz && link.mainType === 'lz' && link.shareUrl) {
+                        html += `<a href="${link.shareUrl}" target="_blank" class="block mt-1 text-green-600">提取码: ${link.shareUrl}</a>`;
+                    }
+                } else {
+                    html += `<p class="text-gray-500 mt-1">暂无有效链接</p>`;
+                }
+
+                html += `</div>`;
+            }
+        });
+
+        document.getElementById('groupedList').innerHTML = html || '<p class="text-center text-gray-500">未找到相关资源</p>';
+    }
+
+
     function renderListPage(page) {
       const items = resources.filter(item => item.type === currentListType);
       const groups = {};
@@ -582,68 +673,29 @@
       div.innerHTML = html;
       div.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', () => {
-          if (!isVerified) return;
+          if (!isVerified) return; // 确保分页按钮也受验证保护
           renderListPage(parseInt(btn.dataset.page));
         });
       });
     }
 
-    // 其他辅助函数
-    function getRandomValidLinks(item) {
-      const validDisks = NET_DISK_FIELDS
-        .filter(field => item[field] && typeof item[field] === 'string' && item[field].trim() !== '' && item[field].startsWith('http'))
-        .map(field => ({
-          type: field === 'lz' ? 'lz' : 'normal',
-          field,
-          name: NET_DISK_NAMES[field] || field.toUpperCase(),
-          url: item[field]
-        }));
-
-      if (validDisks.length === 0) return [];
-
-      const randomIndex = Math.floor(Math.random() * validDisks.length);
-      const selected = validDisks[randomIndex];
-
-      let shareUrl = null;
-      if (selected.type === 'lz') {
-        const validSharePages = CODE_FIELDS
-          .filter(field => item[field] && typeof item[field] === 'string' && item[field].trim() !== '' && item[field].startsWith('http'))
-          .map(field => item[field]);
-
-        if (validSharePages.length > 0) {
-          const randomShareIndex = Math.floor(Math.random() * validSharePages.length);
-          shareUrl = validSharePages[randomShareIndex];
-        }
-      }
-
-      return [{
-        mainType: selected.type,
-        mainText: selected.name,
-        mainUrl: selected.url,
-        hasLz: !!item.lz,
-        shareUrl: shareUrl
-      }];
-    }
-
-    function cleanQuery(query) {
-      let cleaned = query;
-      STOP_WORDS.forEach(word => {
-        const regex = new RegExp(word, 'g');
-        cleaned = cleaned.replace(regex, '');
-      });
-      return cleaned.trim();
-    }
-
-    // 返回按钮
     document.getElementById('backBtn').addEventListener('click', () => {
       listView.classList.add('hidden');
       mainContainer.classList.remove('hidden');
       navSection.classList.remove('hidden');
-      if (!isVerified) showOverlay();
+      if (!isVerified) {
+        // 如果返回时仍未验证，重新显示遮罩
+        showOverlay();
+      }
+      // ✅ 返回时清空搜索框
+      listSearchInput.value = '';
     });
 
-    // 页面加载
-    window.addEventListener('DOMContentLoaded', initPage);
+    // 页面加载完成后初始化
+    window.addEventListener('DOMContentLoaded', () => {
+        initPage();
+    });
+
   </script>
 </body>
 </html>
