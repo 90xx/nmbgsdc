@@ -70,12 +70,12 @@
       </a>
 
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm mb-2">请输入 4 位访问码：</label>
+        <label class="block text-gray-700 text-sm mb-2">请输入访问码：</label>
         <input
           id="accessCodeInput"
           type="text"
-          placeholder="例如: ab12"
-          maxlength="4"
+          placeholder="例如: work"
+          maxlength="15"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
         />
       </div>
@@ -166,60 +166,6 @@
         </ul>
       </div>
 
-      <div class="nav-card bg-white p-6 rounded-xl shadow">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">开发工具</h3>
-        <ul class="space-y-2">
-          <li><a href="https://github.com" target="_blank" class="text-blue-500 hover:underline">GitHub</a></li>
-          <li><a href="https://stackoverflow.com" target="_blank" class="text-blue-500 hover:underline">Stack Overflow</a></li>
-          <li><a href="https://chat.openai.com" target="_blank" class="text-blue-500 hover:underline">ChatGPT</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-card bg-white p-6 rounded-xl shadow">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">娱乐休闲</h3>
-        <ul class="space-y-2">
-          <li><a href="https://www.netflix.com" target="_blank" class="text-blue-500 hover:underline">Netflix</a></li>
-          <li><a href="https://music.163.com" target="_blank" class="text-blue-500 hover:underline">网易云音乐</a></li>
-          <li><a href="https://www.youtube.com" target="_blank" class="text-blue-500 hover:underline">YouTube</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-card bg-white p-6 rounded-xl shadow">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">在线工具</h3>
-        <ul class="space-y-2">
-          <li><a href="https://canva.com" target="_blank" class="text-blue-500 hover:underline">Canva设计</a></li>
-          <li><a href="https://tinypng.com" target="_blank" class="text-blue-500 hover:underline">TinyPNG压缩</a></li>
-          <li><a href="https://www.ilovepdf.com" target="_blank" class="text-blue-500 hover:underline">ILovePDF</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-card bg-white p-6 rounded-xl shadow">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">购物平台</h3>
-        <ul class="space-y-2">
-          <li><a href="https://www.taobao.com" target="_blank" class="text-blue-500 hover:underline">淘宝</a></li>
-          <li><a href="https://www.jd.com" target="_blank" class="text-blue-500 hover:underline">京东</a></li>
-          <li><a href="https://www.amazon.com" target="_blank" class="text-blue-500 hover:underline">Amazon</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-card bg-white p-6 rounded-xl shadow">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">生活服务</h3>
-        <ul class="space-y-2">
-          <li><a href="https://ditu.amap.com" target="_blank" class="text-blue-500 hover:underline">高德地图</a></li>
-          <li><a href="https://www.meituan.com" target="_blank" class="text-blue-500 hover:underline">美团</a></li>
-          <li><a href="https://www.12306.cn" target="_blank" class="text-blue-500 hover:underline">12306</a></li>
-        </ul>
-      </div>
-
-      <div class="nav-card bg-white p-6 rounded-xl shadow">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">资讯门户</h3>
-        <ul class="space-y-2">
-          <li><a href="https://news.sina.com.cn" target="_blank" class="text-blue-500 hover:underline">新浪新闻</a></li>
-          <li><a href="https://www.huxiu.com" target="_blank" class="text-blue-500 hover:underline">虎嗅</a></li>
-          <li><a href="https://sspai.com" target="_blank" class="text-blue-500 hover:underline">少数派</a></li>
-        </ul>
-      </div>
-
     </div>
   </div>
 
@@ -242,30 +188,37 @@
     };
 
     const ACCESS_MAP = {
-      '2026-05-20': { link: 'https://example.com/today', code: '2615' }, // 今天的示例
-      '2026-05-21': { link: 'https://example.com/tomorrow', code: '1234' },
-      '2026-01-06': { link: 'https://pan.quark.cn/s/fbabd589546a', code: '1470' },
-      '2026-01-07': { link: 'https://pan.quark.cn/s/1a2c9a75ca2d', code: '7231' },
-      '2026-01-08': { link: 'https://pan.quark.cn/s/aa0b8d53620a', code: '2048' },
-      '2026-01-09': { link: 'https://pan.quark.cn/s/2da4c170bede', code: '3388' },
-      '2026-01-10': { link: 'https://pan.quark.cn/s/ffd272d299ea', code: '7478' },
-      '2026-01-11': { link: 'https://pan.quark.cn/s/b6c0fc9d4187', code: '1574' },
-      '2026-01-12': { link: 'https://pan.quark.cn/s/031a59f2e250', code: '7865' },
-      '2026-01-13': { link: 'https://pan.quark.cn/s/5455ceee2f80', code: '6855' },
-      '2026-01-14': { link: 'https://pan.quark.cn/s/412ae569c058', code: '3567' },
-      '2026-01-15': { link: 'https://pan.quark.cn/s/7ca20e801c9d', code: '3385' },
-      '2026-01-16': { link: 'https://pan.quark.cn/s/9fe9a95bc5f2', code: '1727' },
-      '2026-01-17': { link: 'https://pan.quark.cn/s/bb6cd1e53d5b', code: '6721' },
-      '2026-01-18': { link: 'https://pan.quark.cn/s/5f17a9a642fb', code: '2824' },
-      '2026-01-19': { link: 'https://pan.quark.cn/s/61cf986dfc4b', code: '6344' },
-      '2026-01-20': { link: 'https://pan.quark.cn/s/8b0f23aba29c', code: '8340' },
-      '2026-01-21': { link: 'https://pan.quark.cn/s/d38ad59e59dd', code: '5558' },
-      '2026-01-22': { link: 'https://pan.quark.cn/s/ebfe6725e44b', code: '1637' },
-      '2026-01-23': { link: 'https://pan.quark.cn/s/707e11322f75', code: '8600' },
-      '2026-01-24': { link: 'https://pan.quark.cn/s/219e178ada01', code: '3876' },
-      '2026-01-25': { link: 'https://pan.quark.cn/s/7ee5a0d569f3', code: '3234' },
-      '2026-01-26': { link: 'https://pan.quark.cn/s/56f2d33a9d79', code: '5207' }
-    };
+  '2026-05-20': { link: 'https://pan.quark.cn/s/d30852a08eff', code: 'bird' },
+  '2026-05-21': { link: 'https://pan.quark.cn/s/6d988f15a4ce', code: 'cake' },
+  '2026-05-22': { link: 'https://pan.quark.cn/s/453aff236542', code: 'desk' },
+  '2026-05-23': { link: 'https://pan.quark.cn/s/bfac19f03767', code: 'fish' },
+  '2026-05-24': { link: 'https://pan.quark.cn/s/bcbfec0eb69b', code: 'game' },
+  '2026-05-25': { link: 'https://pan.quark.cn/s/1007a6691c4b', code: 'hand' },
+  '2026-05-26': { link: 'https://pan.quark.cn/s/a9996bc1030f', code: 'jump' },
+  '2026-05-27': { link: 'https://pan.quark.cn/s/cec97ec3f1d0', code: 'kite' },
+  '2026-05-28': { link: 'https://pan.quark.cn/s/9b8502bf8c6a', code: 'lamp' },
+  '2026-05-29': { link: 'https://pan.quark.cn/s/129e6dd9479f', code: 'moon' },
+  '2026-05-30': { link: 'https://pan.quark.cn/s/0c75af9b394b', code: 'nest' },
+  '2026-05-31': { link: 'https://pan.quark.cn/s/ac2be3c7fbe9', code: 'open' },
+  '2026-06-01': { link: 'https://pan.quark.cn/s/b6965220c8d9', code: 'park' },
+  '2026-06-02': { link: 'https://pan.quark.cn/s/ddb59d52955d', code: 'queen' },
+  '2026-06-03': { link: 'https://pan.quark.cn/s/436bd0ceba2b', code: 'rain' },
+  '2026-06-04': { link: 'https://pan.quark.cn/s/88e327ea396c', code: 'star' },
+  '2026-06-05': { link: 'https://pan.quark.cn/s/9c0549dfd5a1', code: 'tree' },
+  '2026-06-06': { link: 'https://pan.quark.cn/s/ae89882d662b', code: 'umbrella' },
+  '2026-06-07': { link: 'https://pan.quark.cn/s/167faa36f2ab', code: 'vest' },
+  '2026-06-08': { link: 'https://pan.quark.cn/s/f4b191c14b1a', code: 'wolf' },
+  '2026-06-09': { link: 'https://pan.quark.cn/s/22a965389307', code: 'yarn' },
+  '2026-06-10': { link: 'https://pan.quark.cn/s/d1e6ef4cbdae', code: 'zero' },
+  '2026-06-11': { link: 'https://pan.quark.cn/s/40c8a04a61da', code: 'blue' },
+  '2026-06-12': { link: 'https://pan.quark.cn/s/5f38d86ebf6e', code: 'cold' },
+  '2026-06-13': { link: 'https://pan.quark.cn/s/9e3abc53d119', code: 'door' },
+  '2026-06-14': { link: 'https://pan.quark.cn/s/e5bffcf93999', code: 'egg' },
+  '2026-06-15': { link: 'https://pan.quark.cn/s/ab676418abd0', code: 'face' },
+  '2026-06-16': { link: 'https://pan.quark.cn/s/9c4b6582b5f9', code: 'good' },
+  '2026-06-17': { link: 'https://pan.quark.cn/s/e7b8ee3defde', code: 'hair' },
+  '2026-06-18': { link: 'https://pan.quark.cn/s/cbcd05173586', code: 'idea' }
+}
 
     // DOM
     const loadingDiv = document.getElementById('loading');
