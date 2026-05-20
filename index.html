@@ -361,6 +361,7 @@
         }
     });
 
+    // 🔥 修改：getRandomValidLinks 函数
     function getRandomValidLinks(item) {
       const validDisks = NET_DISK_FIELDS
         .filter(field => item[field] && typeof item[field] === 'string' && item[field].trim() !== '' && item[field].startsWith('http'))
@@ -377,7 +378,7 @@
       const selected = validDisks[randomIndex];
 
       // 如果是 lz，收集所有有效的分享页链接
-      let shareUrl = null;
+      let codeUrl = null;
       if (selected.type === 'lz') {
         const validSharePages = CODE_FIELDS
           .filter(field => item[field] && typeof item[field] === 'string' && item[field].trim() !== '' && item[field].startsWith('http'))
@@ -386,11 +387,8 @@
         if (validSharePages.length > 0) {
           // 随机选一个分享页链接
           const randomShareIndex = Math.floor(Math.random() * validSharePages.length);
-          shareUrl = validSharePages[randomShareIndex];
+          codeUrl = validSharePages[randomShareIndex]; // 🔥 将分享页链接存储为 codeUrl
         }
-      } else {
-        // 如果不是 lz，就不需要分享页链接
-        shareUrl = null;
       }
 
       return [{
@@ -398,7 +396,7 @@
         mainText: selected.name,
         mainUrl: selected.url,
         hasLz: !!item.lz && typeof item.lz === 'string' && item.lz.trim() !== '' && item.lz.startsWith('http'),
-        shareUrl: shareUrl
+        codeUrl: codeUrl // 🔥 添加 codeUrl 字段
       }];
     }
 
@@ -559,8 +557,10 @@
                 if (links.length > 0) {
                     const link = links[0];
                     html += `<a href="${link.mainUrl}" target="_blank" class="block mt-1 text-green-600">${link.mainText}</a>`;
-                    if (link.hasLz && link.mainType === 'lz' && link.shareUrl) {
-                        html += `<a href="${link.shareUrl}" target="_blank" class="block mt-1 text-green-600">提取码: ${link.shareUrl}</a>`;
+                    // 🔥 修改：蓝奏云链接显示方式
+                    if (link.hasLz && link.mainType === 'lz' && link.codeUrl) {
+                        // 直接渲染一个链接到分享页的“提取码”文字
+                        html += `<a href="${link.codeUrl}" target="_blank" class="block mt-1 text-green-600">提取码</a>`;
                     }
                 } else {
                     html += `<p class="text-gray-500 mt-1">暂无有效链接</p>`;
